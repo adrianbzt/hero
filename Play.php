@@ -53,6 +53,16 @@ class Play {
     }    
 }
 
+$play = new Play();
+$stats['hero'] = $play->getCharacterStats('Adrian', 'Hero');
+$stats['enemy'] = $play->getCharacterStats('Hades', 'Enemy');
+$success = 200;
+
+$response = array(
+    'status' => $success,
+    'data' => $stats
+);
+echo json_encode($response);
 
 
 if (isset($_POST['action']) && !empty($_POST['action'])) {
@@ -60,16 +70,11 @@ if (isset($_POST['action']) && !empty($_POST['action'])) {
 
     switch ($action) {
         case 'start-fight':
-            $play = new Play();
-            $success = 200;
-            $stats['hero'] = $play->getCharacterStats('Adrian', 'Hero');
-            $stats['enemy'] = $play->getCharacterStats('Hades', 'Enemy');
+            
+            
 
-            $response = array(
-                'status' => $success, 
-                'data' => $stats
-            );
-            echo json_encode($response);
+
+
             break;
         case 'attack':
             $play = new Play();
