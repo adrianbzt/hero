@@ -1,5 +1,5 @@
 body {
-    background-color: cornflowerblue;
+    background-color: lightgray;
 }
 
 .container {
@@ -23,6 +23,12 @@ body {
   padding: 10px;
 }
 
+.enemy-class {
+  grid-area: enemy;
+  background-color: lightcoral;
+  padding: 10px;
+}
+
 .fight-class {
   grid-area: main;
   background-color: cadetblue;
@@ -30,10 +36,7 @@ body {
   padding: 10px;
 }
 
-.enemy-class {
-  grid-area: enemy;
-  background-color: lightcoral;
-}
+
 
 .actions-class {
   grid-area: actions;

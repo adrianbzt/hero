@@ -11,6 +11,8 @@ class Play {
 
     private $view;
     private $actions;
+    private $hero;
+    private $enemy;
 
     public function __constructor() {
         $this->view = new View();
@@ -18,20 +20,39 @@ class Play {
     }
 
     public function getCharacterStats($name, $type) {
-        $hero = new Character($name, $type);
+        $character = new Character($name, $type);
 
-        $stats['type'] = $hero->gettype();
-        $stats['health'] = $hero->gethealth();
-        $stats['strength'] = $hero->getstrenght();
-        $stats['defence'] = $hero->getdefence();
-        $stats['speed'] = $hero->getspeed();
-        $stats['luck'] = $hero->getluck();
-        $stats['rapid-strike'] = $hero->getrapid_strike();
-        $stats['magic-shield'] = $hero->getmagic_shield();
+        if($type == 'Hero') {
+            $this->hero = $character;
+        }
+
+        if ($type == 'Enemy') {
+            $this->enemy = $character;
+        }        
+
+        $stats['type'] = $character->gettype();
+        $stats['health'] = $character->gethealth();
+        $stats['strength'] = $character->getstrenght();
+        $stats['defence'] = $character->getdefence();
+        $stats['speed'] = $character->getspeed();
+        $stats['luck'] = $character->getluck();
+        $stats['rapid-strike'] = $character->getrapid_strike();
+        $stats['magic-shield'] = $character->getmagic_shield();
 
         return $stats;
     }
+
+    public function getHero() 
+    {
+        return $this->hero;
+    }
+
+    public function getEnemy()
+    {
+        return $this->enemy;
+    }    
 }
+
 
 
 if (isset($_POST['action']) && !empty($_POST['action'])) {
@@ -39,25 +60,22 @@ if (isset($_POST['action']) && !empty($_POST['action'])) {
 
     switch ($action) {
         case 'start-fight':
-
             $play = new Play();
+            $success = 200;
             $stats['hero'] = $play->getCharacterStats('Adrian', 'Hero');
             $stats['enemy'] = $play->getCharacterStats('Hades', 'Enemy');
 
-            $success = 200;
-            $values = array(
-                'health'=> 10,
-                'attack' => 50,
-                'defence' => 50,
-            );
             $response = array(
                 'status' => $success, 
                 'data' => $stats
             );
             echo json_encode($response);
             break;
-        case 'blah':
-            echo 'blah';
+        case 'attack':
+            $play = new Play();
+            $play->getCharacterStats('Adrian', 'Hero');
+            print_r($play->getHero());
+            die;
             break;
         default:
             echo 'default';

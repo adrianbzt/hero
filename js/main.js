@@ -10,13 +10,25 @@ $( document ).ready(function() {
             data: { action: 'start-fight' },
             type: 'post',
             success: function (output) {
-                console.log(output)
+                let response = $.parseJSON(output);
+
+                    UpdateStats.prototype.updateStats('hero', response['data']['hero'])
+                    UpdateStats.prototype.updateStats('enemy', response['data']['enemy'])
             }
         });
     })
 
     $('#attack').on('click', function () {
-        console.log("attack")
+                $.ajax({
+                    url: 'Play.php',
+                    data: {
+                        action: 'attack'
+                    },
+                    type: 'post',
+                    success: function (output) {
+                        console.log(output)
+                    }
+                });
     })
     
     $('#surrender').on('click', function () {
