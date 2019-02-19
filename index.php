@@ -1,3 +1,8 @@
+<?php
+
+
+?>
+
 <html>
 <head>
 <script
@@ -14,22 +19,69 @@
 <body>
 <div class="container">
 
-    <div class="flex-item">
-    HeRo
+    <div class="hero-class">
+        <div class="hero-name"> 
+            <span> Hero </span>
+            <span> Adrian </span>
+         </div>
+        <div class="hero-health"> 
+            <span> Health </span>
+            <span> 100 </span>
+         </div>
+        <div class="hero-attack"> 
+            <span> Attack </span>
+            <span> 50 </span>
+        </div>
+        <div class="hero-defence"> 
+            <span> Defence </span>
+            <span> 45 </span>
+        </div>            
     </div>
+    <div class="fight-class">
+        <div>
+            <span>
+                <b>Action</b> : 50 DMG daken <br/>
+                <b>Action</b> : 50 DMG daken <br/>
+                <b>Action</b> : 50 DMG daken <br/>
+                <b>Action</b> : 50 DMG daken <br/>
+                <b>Action</b> : 50 DMG daken <br/>
+                <b>Action</b> : 50 DMG daken <br/>
+                <b>Action</b> : 50 DMG daken <br/>
+                <b>Action</b> : 50 DMG daken <br/>
+                <b>Action</b> : 50 DMG daken <br/>
+                <b>Action</b> : 50 DMG daken <br/>
+                <b>Action</b> : 50 DMG daken <br/>
+                <b>Action</b> : 50 DMG daken <br/>
+                <b>Action</b> : 50 DMG daken <br/>
+                <b>Action</b> : 50 DMG daken <br/>
 
-    <div class="flex-item">
-        FiGht Scene
-    </div>        
-    <div class="flex-item">
-        <input id="start_fight" type="button" value="Start"> </body>
+            </span>
+        </div>
     </div>
-
-    <div class="flex-item">
-    EnEmy
+    <div class="enemy-class">
+        <div class="enemy-name"> 
+            <span> Hero </span>
+            <span> Hades </span>
+         </div>
+        <div class="enemy-health"> 
+            <span> Health </span>
+            <span> 100 </span>
+         </div>
+        <div class="enemy-attack"> 
+            <span> Attack </span>
+            <span> 45 </span>
+        </div>
+        <div class="enemy-defence"> 
+            <span> Defence </span>
+            <span> 40 </span>
+        </div>            
     </div>    
-
-
+    <div class="actions-class">
+        <input id="start_fight" type="button" value="Start Game"> </body>
+        <input id="attack" type="button" value="Attack"> </body>
+        <input id="surrender" type="button" value="Surrender"> </body>
+        <input id="heal" type="button" value="Heal"> </body>
+    </div>    
 
 </div>
 

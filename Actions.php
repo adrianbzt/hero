@@ -14,8 +14,6 @@ class Actions {
 
         $newHealth = $health - $damage;
 
-
-
         echo ' <br> i am attacking with damage: ' . $damage . ' new health: ' . $newHealth;
         
         $player2->sethealth($newHealth);

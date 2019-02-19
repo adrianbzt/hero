@@ -27,6 +27,7 @@ class Character {
         $this->strenght =  $characterSettings->getAttribute($type, 'strength');
         $this->defence = $characterSettings->getAttribute($type, 'defence');
         $this->speed = $characterSettings->getAttribute($type, 'speed');
+        $this->luck = $characterSettings->getAttribute($type, 'luck');
         $this->rapid_strike = $characterSettings->getAttribute($type, 'rapid_strike');
         $this->magic_shield = $characterSettings->getAttribute($type, 'magic_shield');
     }

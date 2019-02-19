@@ -3,22 +3,39 @@ body {
 }
 
 .container {
-    display: flex; /* or inline-flex */
-    height: 600px;
+    height: 50%;
+    margin-top: 5%;
+    display: grid;
+    grid-template-columns: 15em 2fr 15em;
+    grid-template-rows: auto;
     justify-content: center;
-    align-content: center;
+    justify-items: center;
+    grid-template-areas: 
+    "hero main enemy"
+    "hero main enemy"
+    "hero main enemy"
+    "hero actions enemy";
   }
 
-  .flex-item {
-    background: tomato;
-    padding: 5px;
-    width: 200px;
-    height: 150px;
-    margin-top: 10px;
-    
-    line-height: 150px;
-    color: white;
-    font-weight: bold;
-    font-size: 3em;
-    text-align: center;
-  }
+.hero-class {
+  grid-area: hero;
+  background-color: antiquewhite;
+  padding: 10px;
+}
+
+.fight-class {
+  grid-area: main;
+  background-color: cadetblue;
+  justify-self: stretch;
+  padding: 10px;
+}
+
+.enemy-class {
+  grid-area: enemy;
+  background-color: lightcoral;
+}
+
+.actions-class {
+  grid-area: actions;
+  justify-self: center;
+}
