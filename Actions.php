@@ -21,7 +21,11 @@ class Actions {
 
         $health = $player2->getCharacterSettings()->gethealth();
 
-        $newHealth = $health - $damage;
+        if( $damage > $health) {
+            $newHealth = 0;
+        } else {
+            $newHealth = $health - $damage;
+        }
 
         $this->render->render( $player1->getName() . ' attacks with damage: ' . $damage . ' new health: ' . $newHealth);
 
@@ -30,5 +34,26 @@ class Actions {
 
     public function heal() {
 
+    }
+
+    public function isGameOver($player1, $player2) {
+
+        $isGameOver = false;
+
+        if($player1->getCharacterSettings()-> gethealth() == 0 ||  $player2->getCharacterSettings()-> gethealth() == 0) {
+            $isGameOver = true;
+        } 
+
+        return $isGameOver;
+
+    }
+
+    public function getWinner($player1, $player2) {
+        
+        if($player1->getCharacterSettings()->gethealth() > 0) {
+            return $player1->getName();
+        } else {
+            return $player2->getName();
+        }
     }
 }

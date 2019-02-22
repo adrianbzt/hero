@@ -5,21 +5,28 @@ include_once 'Actions.php';
 include_once 'View.php';
 
 $view = new View();
-$actionsObj = new Actions();
 
 $player1 = new Character('Adrian', 'Hero');
 $player2 = new Character('Glass', 'Enemy');
 
+$actions = new Actions( $player1, $player2 );
 
-while( $player1->getCharacterSettings()->gethealth() > 0 || $player2->getCharacterSettings()->gethealth() > 0) {
+$view->render($player1->toString());
+$view->render($player2->toString());
 
-  $actionsObj->attack($player1, $player2);
-  $actionsObj->attack( $player2, $player1);
+while(True) {
+  $actions->attack($player1, $player2);
+  $actions->attack($player2, $player1);
 
-  $view->render($player1->toString());
-  $view->render($player2->toString());
-
+  if( $actions->isGameOver($player2, $player1)) {
+    $view->render($player1->toString());
+    $view->render($player2->toString());
+    $view->render('The winner is: ' . $actions->getWinner($player1, $player2));
+    break;
+  }
 }
+
+
 
 
 
