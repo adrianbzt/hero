@@ -50,42 +50,8 @@ class Play {
     public function getEnemy()
     {
         return $this->enemy;
-    }    
-}
-
-$play = new Play();
-$stats['hero'] = $play->getCharacterStats('Adrian', 'Hero');
-$stats['enemy'] = $play->getCharacterStats('Hades', 'Enemy');
-$success = 200;
-
-$response = array(
-    'status' => $success,
-    'data' => $stats
-);
-echo json_encode($response);
-
-
-if (isset($_POST['action']) && !empty($_POST['action'])) {
-    $action = $_POST['action'];
-
-    switch ($action) {
-        case 'start-fight':
-            
-            
-
-
-
-            break;
-        case 'attack':
-            $play = new Play();
-            $play->getCharacterStats('Adrian', 'Hero');
-            print_r($play->getHero());
-            die;
-            break;
-        default:
-            echo 'default';
-            break;
     }
+   
 }
 
 

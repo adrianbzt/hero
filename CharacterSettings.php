@@ -4,7 +4,15 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-class CharacterSettings {
+class CharacterSettings
+{
+    private $health;
+    private $strenght;
+    private $defence;
+    private $speed;
+    private $luck;
+    private $rapid_strike;
+    private $magic_shield;
 
     private $heroRanges = array(
         "health" => array(
@@ -68,8 +76,18 @@ class CharacterSettings {
         ),                                        
     );    
 
+    public function __construct( $type)
+    {
+        $this->health = $this->getInitialValue($type, 'health');
+        $this->strenght =  $this-> getInitialValue($type, 'strength');
+        $this->defence = $this-> getInitialValue($type, 'defence');
+        $this->speed = $this-> getInitialValue($type, 'speed');
+        $this->luck = $this-> getInitialValue($type, 'luck');
+        $this->rapid_strike = $this-> getInitialValue($type, 'rapid_strike');
+        $this->magic_shield = $this-> getInitialValue($type, 'magic_shield');
+    }
 
-    public function getAttribute($characterType, $attribute) {
+    public function getInitialValue($characterType, $attribute) {
         switch($characterType) {
             case 'Hero':
                 $ranges = $this->heroRanges[$attribute];
@@ -82,8 +100,77 @@ class CharacterSettings {
         }
 
        return $this->setvalue($ranges);
-    
     }
+
+    public function sethealth($health){
+   
+         $this->health = $health;
+    }
+
+    public function gethealth()
+    {
+        return $this->health;
+    }
+
+    public function setstrenght($strenght){
+   
+         $this->strenght = $strenght;
+    }
+
+    public function getstrenght()
+    {
+        return $this->strenght;
+    }
+
+    public function setdefence($defence){
+   
+         $this->defence = $defence;
+    }
+
+    public function getdefence()
+    {
+        return $this->defence;
+    }
+
+    public function setspeed($speed){
+   
+         $this->speed = $speed;
+    }
+
+    public function getspeed()
+    {
+        return $this->speed;
+    }
+
+    public function setluck($luck){
+   
+         $this->luck = $luck;
+    }
+
+    public function getluck()
+    {
+        return $this->luck;
+    }
+
+    public function setrapid_strike($rapid_strike){
+   
+         $this->rapid_strike = $rapid_strike;
+    }
+
+    public function getrapid_strike()
+    {
+        return $this->rapid_strike;
+    }
+
+    public function setmagic_shield($magic_shield){
+   
+         $this->magic_shield = $magic_shield;
+    }
+
+    public function getmagic_shield()
+    {
+        return $this->magic_shield;
+    }    
 
     private function setvalue($ranges){
 
