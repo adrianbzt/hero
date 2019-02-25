@@ -15,11 +15,11 @@ class Actions {
         $this->render = new View();
     }
 
-    public function attack($player1, $player2) {
+    public function attack($attacker, $victim) {
 
-        $damage = $player1->getCharacterSettings()->getstrenght() - $player2->getCharacterSettings()->getdefence();
+        $damage = $attacker->getCharacterSettings()->getstrenght() - $victim->getCharacterSettings()->getdefence();
 
-        $health = $player2->getCharacterSettings()->gethealth();
+        $health = $victim->getCharacterSettings()->gethealth();
 
         if( $damage > $health) {
             $newHealth = 0;
@@ -27,9 +27,9 @@ class Actions {
             $newHealth = $health - $damage;
         }
 
-        $this->render->render( $player1->getName() . ' attacks with damage: ' . $damage . ' new health: ' . $newHealth);
+        $this->render->render( $attacker->getName() . ' attacks! ' . $victim->getName() . ' gets ' . $damage . ' damage! ' .$newHealth . ' = '. $health. ' - ' .  $damage);
 
-        $player2->getCharacterSettings()->sethealth($newHealth);
+        $victim->getCharacterSettings()->sethealth($newHealth);
     }
 
     public function heal() {
