@@ -9,14 +9,13 @@ include 'CharacterProperties.php';
 class CharacterSettings
 {
     private $settings;
-    private $characterProperties;
+    private $properties;
 
     public function __construct( $type)
     {
-        $this->characterProperties = new CharacterProperties();
-        $properties = $this->characterProperties->getProperties();
+        $this->properties = new CharacterProperties();
 
-        foreach( $properties as $value) {
+        foreach( $this->properties->getProperties() as $value) {
             $this->settings[ $value] = $this->getInitialValue($type, $value);
         }
     }
@@ -24,11 +23,11 @@ class CharacterSettings
     public function getInitialValue($characterType, $attribute) {
 
         switch($characterType) {
-            case 'Hero':
-                $ranges = $this->characterProperties->getHeroProp()[$attribute];
+            case $this->properties->getHero():
+                $ranges = $this-> properties->getHeroProp()[$attribute];
             break;
-            case 'Enemy':
-                $ranges = $this->characterProperties->getEnemyProp()[$attribute];
+            case $this->properties->getEnemy():
+                $ranges = $this-> properties->getEnemyProp()[$attribute];
             break;
             default:
             break;

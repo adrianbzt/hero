@@ -59,7 +59,7 @@ class Actions {
         }
     }
 
-    public function setFirstAttack($player1, $player2) {
+    public function getFirstAttacker($player1, $player2) {
 
         $speedResult = $this->compareSpeed($player1, $player2);
 
@@ -88,5 +88,13 @@ class Actions {
         } else {
             return $player2;
         }        
-    }    
+    }
+
+    public function switchPlayers($firstAttacker, $player1, $player2){
+        if( $firstAttacker !== $player1) {
+            return $player1;
+        } else {
+            return $player2;
+        }
+    }
 }

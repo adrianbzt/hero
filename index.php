@@ -5,36 +5,32 @@ include_once 'Actions.php';
 include_once 'View.php';
 
 $view = new View();
+$properties = new CharacterProperties();
 
-$player1 = new Character('Adrian', 'Hero');
-$player2 = new Character('Glass', 'Enemy');
+$player1 = new Character('Kevin', $properties->getHero());
+$player2 = new Character('Patricia', $properties->getEnemy());
 
 $actions = new Actions( $player1, $player2 );
 
 $view->render($player1->toString());
 $view->render($player2->toString());
 
+$attacker = $actions->getFirstAttacker($player1, $player2);
+$defener = $actions->switchPlayers($attacker, $player1, $player2);
+
 while(True) {
+  
+  $actions->attack( $attacker, $defener);
 
-  $firstAttack = $actions->setFirstAttack($player1, $player2);
-
-  $actions->attack($player1, $player2);
-
-  if( $actions->isGameOver($player1, $player2)) {
-    $view->render($player1->toString());
-    $view->render($player2->toString());
-    $view->render('The winner is: ' . $actions->getWinner($player1, $player2));
+  if( $actions->isGameOver( $attacker, $defener)) {
+    $view->render( $attacker->toString());
+    $view->render( $defener->toString());
+    $view->render('The winner is: ' . $actions->getWinner($attacker, $defener));
     break;
   }
 
-  $actions->attack($player2, $player1);
-
-  if($actions->isGameOver($player1, $player2)) {
-    $view->render($player1->toString());
-    $view->render($player2->toString());
-    $view->render('The winner is: ' . $actions->getWinner($player1, $player2));
-    break;
-  }
+  $attacker = $defener;
+  $defener = $attacker;
 
 }
 

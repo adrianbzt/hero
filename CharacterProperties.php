@@ -10,6 +10,9 @@ class CharacterProperties {
     const RAPID_STRIKE = 'rapid_strike';
     const MAGIC_SHIELD = 'magic_shield';
 
+    const HERO = 'hero';
+    const ENEMY = 'enemy';
+
     const PROPERTIES = [self:: HEALTH, self:: STRENGTH, self:: DEFENCE, self:: SPEED, self:: LUCK, self:: RAPID_STRIKE, self:: MAGIC_SHIELD];
 
     const HERO_PROP = array(
@@ -115,7 +118,17 @@ class CharacterProperties {
     public function getMagicShield()
     {
         return self::MAGIC_SHIELD;
-    }      
+    }
+
+    public function getHero()
+    {
+        return self::HERO;
+    }
+
+    public function getEnemy()
+    {
+        return self::ENEMY;
+    }    
 
     public function getProperties() 
     {
