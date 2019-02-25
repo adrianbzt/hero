@@ -10,12 +10,14 @@ class Character {
     private $name;
     private $type;
     private $characterSettings;
+    private $properties;
 
     function __construct($name, $type) {
 
         $this->name = $name;
         $this->type = $type;
         $this->characterSettings = new CharacterSettings($type);
+        $this->properties = new CharacterProperties();
 
     }
 
@@ -41,15 +43,13 @@ class Character {
     } 
 
     public function toString(){
-        return 
-        'N: ' . $this->name
-        . ' T: ' . $this->type 
-        . ' H: '. $this-> characterSettings->gethealth() 
-        .' S: ' . $this->characterSettings->getstrenght()
-        .' D: ' . $this->characterSettings->getdefence() 
-        .' SP: ' . $this->characterSettings->getspeed()
-        .' RS: ' . $this->characterSettings->getrapid_strike() 
-        .' MS ' . $this->characterSettings->getmagic_shield();
+
+        $theString = 'N: ' . $this->name . ' T: ' . $this->type;
+
+        foreach( $this->properties as $property) {
+            $theString .= ' ' . $property . ': ' . $this->characterSettings->getSetting( $property);
+        }
+        return $theString;
     }
     
 }

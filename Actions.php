@@ -9,17 +9,19 @@ include_once 'View.php';
 class Actions {
 
     private $render;
+    private $properties;
 
     public function __construct()
     {
         $this->render = new View();
+        $this->properties = new CharacterProperties();
     }
 
     public function attack($attacker, $victim) {
 
-        $damage = $attacker->getCharacterSettings()->getstrenght() - $victim->getCharacterSettings()->getdefence();
+        $damage = $attacker->getCharacterSettings()->getSetting( $this->properties->getStrength()) - $victim->getCharacterSettings()-> getSetting( $this->properties->getDefence());
 
-        $health = $victim->getCharacterSettings()->gethealth();
+        $health = $victim->getCharacterSettings()-> getSetting( $this->properties->getHealth());
 
         if( $damage > $health) {
             $newHealth = 0;
@@ -29,7 +31,7 @@ class Actions {
 
         $this->render->render( $attacker->getName() . ' attacks! ' . $victim->getName() . ' gets ' . $damage . ' damage! ' .$newHealth . ' = '. $health. ' - ' .  $damage);
 
-        $victim->getCharacterSettings()->sethealth($newHealth);
+        $victim->getCharacterSettings()->setSetting( $this->properties->getHealth(), $newHealth);
     }
 
     public function heal() {
@@ -40,7 +42,7 @@ class Actions {
 
         $isGameOver = false;
 
-        if($player1->getCharacterSettings()-> gethealth() == 0 ||  $player2->getCharacterSettings()-> gethealth() == 0) {
+        if($player1->getCharacterSettings()-> getSetting( $this->properties->getHealth()) == 0 ||  $player2->getCharacterSettings()-> getSetting( $this->properties->getHealth()) == 0) {
             $isGameOver = true;
         } 
 
@@ -50,7 +52,7 @@ class Actions {
 
     public function getWinner($player1, $player2) {
         
-        if($player1->getCharacterSettings()->gethealth() > 0) {
+        if($player1->getCharacterSettings()-> getSetting( $this->properties->getHealth()) > 0) {
             return $player1->getName();
         } else {
             return $player2->getName();
