@@ -59,16 +59,28 @@ class Actions {
         }
     }
 
-    public function getFirstAttacker($player1, $player2) {
+    public function getFirstRoundRoles($player1, $player2) {
 
         $speedResult = $this->compareSpeed($player1, $player2);
 
         if( $speedResult == null) {
             $luckResult = $this->compareLuck($player1, $player2);
-            return $luckResult;
+            if( $luckResult == $player1) {
+                $defender = $player2;
+            } else {
+                $defender = $player1;
+            }
+            return array('attacker' => $luckResult, 'defender' => $defender);
         } else {
-            return $speedResult;
+            if( $speedResult == $player1) {
+                $defender = $player2;
+            } else {
+                $defender = $player1;
+            }            
+            return array('attacker' => $speedResult, 'defender' => $defender);
         }
+
+        
     }
 
     private function compareSpeed($player1, $player2){
@@ -90,11 +102,12 @@ class Actions {
         }        
     }
 
-    public function switchPlayers($firstAttacker, $player1, $player2){
-        if( $firstAttacker !== $player1) {
-            return $player1;
-        } else {
-            return $player2;
-        }
+    public function switchPlayers($player1, $player2)
+    {
+            $tmp= $player1;
+            $player1= $player2;
+            $player2= $tmp;
+
+            return array('attacker' => $player1, 'defender' => $player2);
     }
 }

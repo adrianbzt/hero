@@ -15,22 +15,20 @@ $actions = new Actions( $player1, $player2 );
 $view->render($player1->toString());
 $view->render($player2->toString());
 
-$attacker = $actions->getFirstAttacker($player1, $player2);
-$defener = $actions->switchPlayers($attacker, $player1, $player2);
+$players = $actions->getFirstRoundRoles($player1, $player2);
+
 
 while(True) {
-  
-  $actions->attack( $attacker, $defener);
+  $actions->attack( $players[ 'attacker'], $players['defender']);
 
-  if( $actions->isGameOver( $attacker, $defener)) {
-    $view->render( $attacker->toString());
-    $view->render( $defener->toString());
-    $view->render('The winner is: ' . $actions->getWinner($attacker, $defener));
+  if( $actions->isGameOver($players['attacker'], $players['defender'])) {
+    $view->render($players['attacker']->toString());
+    $view->render($players['defender']->toString());
+    $view->render('The winner is: ' . $actions->getWinner($players['attacker'], $players['defender']));
     break;
   }
 
-  $attacker = $defener;
-  $defener = $attacker;
+  $players = $actions->switchPlayers($players['attacker'], $players['defender']);
 
 }
 
