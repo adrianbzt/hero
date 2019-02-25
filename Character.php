@@ -46,7 +46,7 @@ class Character {
 
         $theString = 'N: ' . $this->name . ' T: ' . $this->type;
 
-        foreach( $this->properties as $property) {
+        foreach( $this->properties->getProperties() as $property) {
             $theString .= ' ' . $property . ': ' . $this->characterSettings->getSetting( $property);
         }
         return $theString;

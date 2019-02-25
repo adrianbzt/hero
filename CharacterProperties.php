@@ -13,25 +13,32 @@ class CharacterProperties {
     const PROPERTIES = [self:: HEALTH, self:: STRENGTH, self:: DEFENCE, self:: SPEED, self:: LUCK, self:: RAPID_STRIKE, self:: MAGIC_SHIELD];
 
     const HERO_PROP = array(
-        self:: HEALTH => array('min' => 70,
+        self:: HEALTH => array(
+            'min' => 70,
             'max' => 100,
         ),
-        self:: STRENGTH => array('min' => 70,
+        self:: STRENGTH => array(
+            'min' => 70,
             'max' => 80,
         ),
-        self:: DEFENCE => array('min' => 45,
+        self:: DEFENCE => array(
+            'min' => 45,
             'max' => 55,
         ),
-        self:: SPEED => array('min' => 40,
+        self:: SPEED => array(
+            'min' => 40,
             'max' => 50,
         ),
-        self:: LUCK => array('min' => 10,
+        self:: LUCK => array(
+            'min' => 10,
             'max' => 30,
         ),
-        self::RAPID_STRIKE => array('min' => 10,
+        self::RAPID_STRIKE => array(
+            'min' => 10,
             'max' => 10,
         ),
-        self::MAGIC_SHIELD => array('min' => 20,
+        self::MAGIC_SHIELD => array(
+            'min' => 20,
             'max' => 20,
         ),
         );
@@ -76,7 +83,8 @@ class CharacterProperties {
         return self::ENEMY_PROP;
     }
 
-    public function getHealth() {
+    public function getHealth() 
+    {
         return self::HEALTH;
     }
     public function getStrength()
@@ -96,7 +104,7 @@ class CharacterProperties {
 
     public function getLuck()
     {
-        return self::LUCk;
+        return self::LUCK;
     }
 
     public function getRapidStrike()
@@ -109,7 +117,8 @@ class CharacterProperties {
         return self::MAGIC_SHIELD;
     }      
 
-    public function getProperties() {
+    public function getProperties() 
+    {
         return self::PROPERTIES;
     }
 

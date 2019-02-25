@@ -15,6 +15,9 @@ $view->render($player1->toString());
 $view->render($player2->toString());
 
 while(True) {
+
+  $firstAttack = $actions->setFirstAttack($player1, $player2);
+
   $actions->attack($player1, $player2);
 
   if( $actions->isGameOver($player1, $player2)) {

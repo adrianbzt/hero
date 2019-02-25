@@ -58,4 +58,35 @@ class Actions {
             return $player2->getName();
         }
     }
+
+    public function setFirstAttack($player1, $player2) {
+
+        $speedResult = $this->compareSpeed($player1, $player2);
+
+        if( $speedResult == null) {
+            $luckResult = $this->compareLuck($player1, $player2);
+            return $luckResult;
+        } else {
+            return $speedResult;
+        }
+    }
+
+    private function compareSpeed($player1, $player2){
+        if ($player1->getCharacterSettings()->getSetting($this->properties->getSpeed()) > $player2->getCharacterSettings()->getSetting($this->properties->getSpeed())) {
+            return $player1;
+        } else if ($player1->getCharacterSettings()->getSetting($this->properties->getSpeed()) == $player2->getCharacterSettings()->getSetting($this->properties->getSpeed())) {
+            return null;
+        } else {
+            return $player2;
+        }
+    }
+
+    private function compareLuck($player1, $player2){
+    
+        if ($player1->getCharacterSettings()->getSetting($this->properties->getLuck()) >= $player2->getCharacterSettings()->getSetting($this->properties-> getLuck())) {
+            return $player1;
+        } else {
+            return $player2;
+        }        
+    }    
 }
