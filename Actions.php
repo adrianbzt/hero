@@ -8,11 +8,13 @@ include_once 'View.php';
 
 class Actions {
 
+    private $max_rounds;
     private $render;
     private $properties;
 
     public function __construct()
     {
+        $this->max_rounds = 20;
         $this->render = new View();
         $this->properties = new CharacterProperties();
     }
@@ -47,15 +49,22 @@ class Actions {
         } 
 
         return $isGameOver;
-
     }
 
     public function getWinner($player1, $player2) {
         
-        if($player1->getCharacterSettings()-> getSetting( $this->properties->getHealth()) > 0) {
+        if($player1->getCharacterSettings()-> getSetting( $this->properties->getHealth()) > 0 && $player2->getCharacterSettings()->getSetting($this->properties->getHealth()) > 0) {
+
+            if( $player1->getCharacterSettings()->getSetting($this->properties->getHealth()) > $player2->getCharacterSettings()->getSetting($this->properties->getHealth())) {
+                return $player1->getName();
+            } else {
+                return $player2->getName();
+            }
             return $player1->getName();
-        } else {
+        } else if ( $player1->getCharacterSettings()->getSetting($this->properties->getHealth()) == 0) {
             return $player2->getName();
+        } else if ( $player2->getCharacterSettings()->getSetting($this->properties->getHealth()) == 0) {
+            return $player1->getName();
         }
     }
 
@@ -65,22 +74,23 @@ class Actions {
 
         if( $speedResult == null) {
             $luckResult = $this->compareLuck($player1, $player2);
-            if( $luckResult == $player1) {
-                $defender = $player2;
-            } else {
-                $defender = $player1;
-            }
-            return array('attacker' => $luckResult, 'defender' => $defender);
+            return array('attacker' => $luckResult, 'defender' => $this->decideDefender( $luckResult, $player1, $player2));
         } else {
-            if( $speedResult == $player1) {
-                $defender = $player2;
-            } else {
-                $defender = $player1;
-            }            
-            return array('attacker' => $speedResult, 'defender' => $defender);
+            return array('attacker' => $speedResult, 'defender' => $this->decideDefender( $speedResult, $player1, $player2));
         }
 
         
+    }
+
+    private function decideDefender($attacker, $player1, $player2) {
+        if( $attacker == $player1) {
+            $defender = $player2;
+        } else {
+            $defender = $player1;
+        } 
+
+        return $defender;
+
     }
 
     private function compareSpeed($player1, $player2){
@@ -102,7 +112,7 @@ class Actions {
         }        
     }
 
-    public function switchPlayers($player1, $player2)
+    public function switchRoles($player1, $player2)
     {
             $tmp= $player1;
             $player1= $player2;
@@ -110,4 +120,14 @@ class Actions {
 
             return array('attacker' => $player1, 'defender' => $player2);
     }
+
+    public function getMaxRounds() 
+    {
+        return $this->max_rounds;
+    }
+
+    public function setMaxRounds($max_rounds)
+    {
+        $this->max_rounds = $max_rounds;
+    }    
 }
